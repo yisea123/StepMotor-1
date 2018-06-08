@@ -21,6 +21,13 @@ int main(void)
         Loop_Begin(500)
 		{
 			 LED1=!LED1; 
+//            Start_Motor_SPTA(0,M4_CLOCKWISE,200*20);  		 
+//	while(StepMotor[0].running==1);
+//	Delay_Ms(500); 
+//	Start_Motor_SPTA(0,M4_UNCLOCKWISE,200*20); 	 
+//	while(StepMotor[0].running==1); 
+//	Delay_Ms(500);
+            
 		}Loop_End()
         
         Loop_Begin(100)
@@ -28,7 +35,7 @@ int main(void)
             if(USART1_RxOK)
             {
                 //USART1_Printf("%s\n",USART1_RxBuffer );
-                LCC_Cmd_Process(USART1_RxData,strlen((char*)USART1_RxData));
+               //LCC_Cmd_Process(USART1_RxData,strlen((char*)USART1_RxData));
                 USART1_RxOK=0;
             }    
 		}Loop_End()
@@ -37,11 +44,12 @@ int main(void)
 		{ 
             if(u8MatlabDebugMode)
             {
-                MakeDebugBuffer();
+                //MakeDebugBuffer();
             } 
            //USART1_Printf("X:%.2f,Y:%.2f,Z:%.2f\r\n",f32XAngle ,f32YAngle ,f32ZAngle);
 		}Loop_End()
         
+        /*
         Loop_Begin(10)
 		{
             //i16XXgyro = i16XGyro_Last-pre_i16Xgyro;
@@ -66,6 +74,7 @@ int main(void)
                 TIM_SetCompare1(TIM1,(uint32_t)pwm);
             }
 		}Loop_End()
+        */
               
         
     }

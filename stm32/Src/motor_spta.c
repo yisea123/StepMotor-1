@@ -300,7 +300,7 @@ void Initial_Motor(unsigned char MotorID, unsigned char StepDive,unsigned int ma
 	pmotor_spta=&StepMotor[MotorID];
 	switch(MotorID)
     {
-	case 1:
+	case 0:
 		pmotor_spta->clockwise=M1_CLOCKWISE;	//设置正反转
 		pmotor_spta->PWM_PORT=MOTOR1_PWMPORT;
 		pmotor_spta->PWM_pin =MOTOR1_PWMPIN;
@@ -309,7 +309,7 @@ void Initial_Motor(unsigned char MotorID, unsigned char StepDive,unsigned int ma
 		pmotor_spta->EN_PORT =MOTOR1_ENPORT;
 		pmotor_spta->EN_pin  =MOTOR1_ENPIN;
 		break;
-	case 2:
+	case 1:
 		pmotor_spta->clockwise=M2_CLOCKWISE;	//设置正反转
 		pmotor_spta->PWM_PORT=MOTOR2_PWMPORT;
 		pmotor_spta->PWM_pin =MOTOR2_PWMPIN;
@@ -319,7 +319,7 @@ void Initial_Motor(unsigned char MotorID, unsigned char StepDive,unsigned int ma
 		pmotor_spta->EN_pin  =MOTOR2_ENPIN;
 	
 		break;
-	case 3:
+	case 2:
 		pmotor_spta->clockwise=M3_CLOCKWISE;	//设置正反转
 		pmotor_spta->PWM_PORT=MOTOR3_PWMPORT;
 		pmotor_spta->PWM_pin =MOTOR3_PWMPIN;
@@ -327,7 +327,7 @@ void Initial_Motor(unsigned char MotorID, unsigned char StepDive,unsigned int ma
 		pmotor_spta->DIR_pin =MOTOR3_DIRPIN;
 		pmotor_spta->EN_PORT =MOTOR3_ENPORT;
 		pmotor_spta->EN_pin  =MOTOR3_ENPIN;
-	case 4:
+	case 3:
 		pmotor_spta->clockwise=M4_CLOCKWISE;	//设置正反转
 		pmotor_spta->PWM_PORT=MOTOR4_PWMPORT;
 		pmotor_spta->PWM_pin =MOTOR4_PWMPIN;

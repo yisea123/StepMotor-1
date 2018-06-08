@@ -11,17 +11,57 @@ void DRV_Init1(void)	//驱动层初始化第一步
     MY_GPIO_Init();
     Delay_Init();
     Delay_Ms(1000);
-    mpu6050_init();
+    //mpu6050_init();
+    USART1_Init(115200);
     
-    TIM1_Init(1,3600);
+//    while(1)
+//    {
+//        PAout(1)=1;
+//        Delay_Us(100);
+//        PAout(1)=0;
+//        Delay_Us(100);
+//    }
+    //TIM1_Init(1,3600);
     //TIM2_Init(72-1,10000);   
-    TIM3_Init(72-1,10000);
+    //TIM3_Init(72-1,10000);
     TIM4_Init(72-1,10000);
     
+    Initial_Motor(0,M1DIV,73600,TIM4);
+    
+    //Start_Motor_SPTA(0,M1_UNCLOCKWISE,360);
+    //SetSpeed(0,10);
+     while(1)
+    {
+    Start_Motor_SPTA(0,M1_UNCLOCKWISE,100); 
+        //SetSpeed(0,10);
+    //while(StepMotor[0].running==1); 	
+    Delay_Ms(500); 
+    Start_Motor_SPTA(0,M1_CLOCKWISE,100); 
+    //while(StepMotor[0].running==1); 	
+    Delay_Ms(500); 
+    }
+//    
+////    
+//    Start_Motor_SPTA(0,M4_CLOCKWISE,200*20);  		 
+//	while(StepMotor[0].running==1);
+//	Delay_Ms(500); 
+//	Start_Motor_SPTA(0,M4_UNCLOCKWISE,200*20); 	 
+//	while(StepMotor[0].running==1); 
+//	Delay_Ms(500);
+//    Start_Motor_SPTA(0,M4_CLOCKWISE,200*20);  		 
+//	while(StepMotor[0].running==1);
+//	Delay_Ms(500); 
+//	Start_Motor_SPTA(0,M4_UNCLOCKWISE,200*20); 	 
+//	while(StepMotor[0].running==1); 
+//	Delay_Ms(500);
+//    Start_Motor_SPTA(0,M4_CLOCKWISE,200*20);  		 
+//	while(StepMotor[0].running==1);
+//	Delay_Ms(500); 
+//	Start_Motor_SPTA(0,M4_UNCLOCKWISE,200*20); 	 
+//	while(StepMotor[0].running==1); 
+//	Delay_Ms(500);
    
-   
-
-    USART1_Init(115200);
+    
     //EXTIX_Init();
     //DMA1_Channel1_Configuration((uint32_t) &AD_Value[0][0], KEY_BUFFER*KEY_COUNT);
     //ADC1_Init(); 
@@ -34,10 +74,10 @@ void TIM3_IRQHandler(void)
 {
     if ( TIM_GetITStatus(TIM3 , TIM_IT_Update) != RESET )
     {  
-        time2=Time_Nowms()-time1; 
-        time1=Time_Nowms();
-        ENC_Calc_Average_Speed();
-        mpu6050_read();          
+//        time2=Time_Nowms()-time1; 
+//        time1=Time_Nowms();
+//        ENC_Calc_Average_Speed();
+//        mpu6050_read();          
         TIM_ClearITPendingBit(TIM3 , TIM_FLAG_Update);          
     }
 }
@@ -45,13 +85,15 @@ void TIM3_IRQHandler(void)
 void TIM4_IRQHandler(void)
 {    
 	if ( TIM_GetITStatus(TIM4 , TIM_IT_Update) != RESET ) 
-	{				
+	{	
+        TIMX_IRQHandler_SPTA(&StepMotor[0]);     
+        
 		TIM_ClearITPendingBit(TIM4 , TIM_FLAG_Update); 
 
-         if (hEncoder_Timer_Overflow != 65535)  
-          {
-                hEncoder_Timer_Overflow++;
-          }
+//         if (hEncoder_Timer_Overflow != 65535)  
+//          {
+//                hEncoder_Timer_Overflow++;
+//          }
       
 	}
    
@@ -60,7 +102,7 @@ void TIM4_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
 	//Delay_Ms(20);//消抖
-	EXTI_ClearITPendingBit(EXTI_Line10);  //清除LINE4上的中断标志位  
+	//EXTI_ClearITPendingBit(EXTI_Line10);  //清除LINE4上的中断标志位  
 }	
 
 /*
@@ -154,3 +196,4 @@ void EXTI4_IRQHandler(void)
   }
 }
 */
+
