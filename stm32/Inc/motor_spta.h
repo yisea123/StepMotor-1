@@ -55,10 +55,10 @@ typedef __packed struct
 #define M4_CLOCKWISE					0	//顺时针
 #define M4_UNCLOCKWISE				1		//逆时针
 
-#define M1DIV               16   			//定义电机1的细分数
-#define M2DIV               16   			//定义电机2的细分数
-#define M3DIV               16   			//定义电机3的细分数
-#define M4DIV               16   			//定义电机4的细分数
+#define M1DIV               32   			//定义电机1的细分数
+#define M2DIV               32   			//定义电机2的细分数
+#define M3DIV               32   			//定义电机3的细分数
+#define M4DIV               32   			//定义电机4的细分数
 
 #define IDLE				0				//空闲状态
 #define ACCELERATING		1               //加速状态
@@ -66,18 +66,18 @@ typedef __packed struct
 #define DECELERATING		3               //减速状态
 
 #define STEP_SPTA			20			    //SPTA最大速度等级
-#define MAXSPEED_SPTA   	8000		    //SPTA最大速度
-#define ACCSPEED_SPTA		15000		    //SPTA加速度
+#define MAXSPEED_SPTA   	80000		    //SPTA最大速度
+#define ACCSPEED_SPTA		150000		    //SPTA加速度
 
 //#define OUTPUT_DATA   /*用于将电机运行时的定时器信息通过串口上传*/
-#define MOTOR1_PWMPORT GPIOA
-#define MOTOR1_PWMPIN  GPIO_Pin_1
+#define MOTOR1_PWMPORT GPIOB
+#define MOTOR1_PWMPIN  GPIO_Pin_6
 
-#define MOTOR1_DIRPORT GPIOA
-#define MOTOR1_DIRPIN  GPIO_Pin_2
+#define MOTOR1_DIRPORT GPIOB
+#define MOTOR1_DIRPIN  GPIO_Pin_7
 
-#define MOTOR1_ENPORT GPIOA
-#define MOTOR1_ENPIN  GPIO_Pin_0
+#define MOTOR1_ENPORT GPIOB
+#define MOTOR1_ENPIN  GPIO_Pin_8
 
 #define MOTOR2_PWMPORT GPIOB
 #define MOTOR2_PWMPIN  GPIO_Pin_6
@@ -113,7 +113,6 @@ extern MOTOR_CONTROL_SPTA StepMotor[4];
 
 void Initial_Motor(unsigned char MotorID, unsigned char StepDive,unsigned int maxposition , TIM_TypeDef* TIMx);
 void Start_Motor_SPTA(unsigned char MotorID,unsigned char dir,unsigned int Degree);
-void SetSpeed(unsigned char MotorID,signed char speedindex);
 void TIMX_IRQHandler_SPTA(MOTOR_CONTROL_SPTA *pmotor);
     
 

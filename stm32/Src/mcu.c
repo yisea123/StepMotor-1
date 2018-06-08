@@ -187,15 +187,7 @@ void MY_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;//浮空输入
     GPIO_Init(GPIOA, &GPIO_InitStructure);  
     
-    
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2; 
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-    GPIO_ResetBits(GPIOA,GPIO_Pin_0);
-    GPIO_ResetBits(GPIOA,GPIO_Pin_1);
-    GPIO_ResetBits(GPIOA,GPIO_Pin_2);
-	/*	     
+			     
  	//配置PB10 PB11 为开漏输出  刷新频率为10Mhz
  	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_11;
 	//配置PB6 PB7 为开漏输出  刷新频率为10Mhz
@@ -220,7 +212,6 @@ void MY_GPIO_Init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;  
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-    */
     
     /*
     //PA0 TIM2_CH1 LeftStepMoter_CLK
@@ -442,7 +433,7 @@ void TIM4_Init(uint32_t u32Prescaler, uint32_t u32Period)
 	TIM_ITConfig(TIM4,TIM_IT_Update,ENABLE);
 	TIM_Cmd(TIM4, ENABLE);	
     */
-    /*
+
     TIM_DeInit(TIM4);
 	TIM_TimeBaseStructure.TIM_Period=4*ENCODER_PPR-1;
 	TIM_TimeBaseStructure.TIM_Prescaler= 0x0;  // No prescaling 
@@ -463,23 +454,7 @@ void TIM4_Init(uint32_t u32Prescaler, uint32_t u32Period)
     //TIM2->CNT = COUNTER_RESET;
 
     //ENC_Clear_Speed_Buffer();
-    TIM_Cmd(TIM4, ENABLE);	 
-    //TIM_Cmd(TIM4, DISABLE);
-    */
-    
-    TIM_DeInit(TIM4);
-	TIM_TimeBaseStructure.TIM_Period = 29;                        //自动装载计数器周期值
-#ifdef OUTPUT_DATA
-	TIM_TimeBaseStructure.TIM_Prescaler = 2800; //2800                    //预分频值	 29
-#else
-	TIM_TimeBaseStructure.TIM_Prescaler = 14; //2800                    //预分频值	 29
-#endif
-	TIM_TimeBaseStructure.TIM_ClockDivision = 0;                  //时钟分隔
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;   //计数模式
-	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);               //初始化
-	TIM_ClearFlag(TIM4, TIM_FLAG_Update);
-	TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
-	TIM_Cmd(TIM4, DISABLE);
+    TIM_Cmd(TIM4, ENABLE);	    
 }
 
 

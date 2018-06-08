@@ -15,7 +15,6 @@
 #include "mcu.h"
 #include "mymath.h"
 #include "encoder.h"
-#include "motor_spta.h"
 
 void DRV_Init1(void);
 //void Stepper_Motor(int32_t i32LeftSpeed ,int32_t i32RightSpeed);
